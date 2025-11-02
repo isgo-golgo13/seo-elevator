@@ -18,7 +18,7 @@ seo-lovator/
 │   └── cli/                # Command-line interface
 │
 └── test-site/               # Test websites
-    └── vanilla-site/
+    └── test-site/
         └── index.html
 ```
 
