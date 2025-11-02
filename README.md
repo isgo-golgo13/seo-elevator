@@ -1,4 +1,4 @@
-# seo-lovator
+# SEO Elevator (SEO-Lovator) Rust
 Site SEO Engine in Rust
 
 # Project Structure
