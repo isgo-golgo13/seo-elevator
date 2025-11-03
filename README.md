@@ -1,9 +1,9 @@
-# SEO Elevator (SEO-Lovator) Rust
+# SEO Elevator Rust
 Site SEO Engine in Rust
 
 # Project Structure
 ```shell
-seo-lovator/
+seo-elevator/
 ├── Cargo.toml              # Workspace configuration
 ├── Dockerfile              # Rootless multi-stage container
 ├── README.md               # Main documentation
