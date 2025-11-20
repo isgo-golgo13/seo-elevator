@@ -1,9 +1,9 @@
-# SEO Elevator Rust
-Site SEO Engine in Rust
+# Rank Site Spike Rust
+Site SEO Rank Spiking Engine in Rust
 
 # Project Structure
 ```shell
-seo-elevator/
+rank-site-spike-rs/
 ├── Cargo.toml              # Workspace configuration
 ├── Dockerfile              # Rootless multi-stage container
 ├── README.md               # Main documentation
