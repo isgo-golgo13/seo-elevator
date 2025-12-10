@@ -1,9 +1,9 @@
-# Rank Site Spike Rust
+# Site Ranker (Rust)
 Site SEO Rank Spiking Engine in Rust
 
 # Project Structure
 ```shell
-rank-site-spike-rs/
+site-ranker-rs/
 ├── Cargo.toml              # Workspace configuration
 ├── Dockerfile              # Rootless multi-stage container
 ├── README.md               # Main documentation
