@@ -12,10 +12,10 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 
 | Traditional SEO Tools | site-ranker-rs |
 |-----------------------|----------------|
-| ❌ Rule-based audits only | ✅ ML-powered optimization |
-| ❌ Manual implementation | ✅ Auto-inject metadata |
-| ❌ Generic recommendations | ✅ Business-type aware |
-| ❌ No Schema.org generation | ✅ Full JSON-LD with trends |
+| [X] Rule-based audits only | [+] ML-powered optimization |
+| [X] Manual implementation | [+] Auto-inject metadata |
+| [X] Generic recommendations | [+] Business-type aware |
+| [X] No Schema.org generation | [+] Full JSON-LD with trends |
 
 
 **Don't just audit SEO — let AI write SEO that converts.**
@@ -24,7 +24,7 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 
 ### Intelligent Analysis
 - **Framework Detection** - Next.js, React, Vue, Vite, vanilla HTML
-- **Business Type Recognition** - SaaS, E-commerce, Services, Blog ...
+- **Site Type Recognition** - SaaS, E-commerce, Services,  ...
 - **Keyword Extraction** - TF-IDF inspired scoring with phrase detection
 - **SEO Audit** - Title, description, OG tags, Twitter Cards, Schema.org
 
@@ -35,9 +35,9 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 - **Description Generation** - CTA-focused, engagement-optimized
 
 ### Schema.org Trend Prediction
-- **Rich Snippet Trends** - Know which schemas are gaining SERP features
-- **Business-Specific Schemas** - FAQPage, Product, LocalBusiness, etc.
-- **Proactive Recommendations** - "Add FAQPage schema NOW - trending!"
+- **Rich Trends** - Know which schemas are gaining SERP features
+- **Site-Specific Schemas** - FAQPage, Product, ...
+- **Proactive Recommendations** - "Add FAQPage schema NOW - trending"
 
 ### Automatic Injection
 - **Meta Tags** - Title, description, keywords, canonical
