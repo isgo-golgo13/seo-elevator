@@ -23,3 +23,12 @@ site-ranker-rs/
         └── index.html
 ```
 
+## Key Dependencies Per-Crate
+
+
+| Crate              | Dependencies                              |
+|--------------------|-------------------------------------------|
+| `analyzer`         | scraper, regex, serde                     | 
+| `injector`         | scraper, serde_json, regex                | 
+| `ml-engine`        | tch (feature-gated), tokio                |      
+| `cli`              | clap, tokio, colored, all internal crates | 
