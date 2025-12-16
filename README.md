@@ -119,7 +119,7 @@ ANALYSIS RESULTS
 ══════════════════════════════════════════════════
 
 Framework: React
-Main file: ./my-website/public/index.html
+Main file: ./website-x/public/index.html
 Business Type: SaaS
 
 SEO Audit:
