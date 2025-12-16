@@ -27,7 +27,7 @@ cp target/release/site-ranker ~/.local/bin/
 # Analyze the included template
 ./target/release/site-ranker analyze ./site-templates/template-site
 
-# You'll see output like:
+# Expected output:
 # SEO Score: 15/100
 # Optimization Score: 35/100
 ```
@@ -48,7 +48,7 @@ cp target/release/site-ranker ~/.local/bin/
 # View the optimized HTML
 cat ./optimized-site/index.html
 
-# You'll see injected:
+# Expected injections output:
 # - Meta tags (title, description, keywords)
 # - Open Graph tags
 # - Twitter Cards  
@@ -70,20 +70,20 @@ site-ranker run ./path/to/your/website \
 ### Just Analyze (No Changes)
 
 ```bash
-site-ranker analyze ./my-site
-site-ranker analyze ./my-site --output report.json --format json
+site-ranker analyze ./website-x
+site-ranker analyze ./website-x --output report.json --format json
 ```
 
 ### Dry Run (Preview Changes)
 
 ```bash
-site-ranker inject ./my-site --dry-run
+site-ranker inject ./website-x --dry-run
 ```
 
 ### Generate Report
 
 ```bash
-site-ranker report ./my-site --output seo-report.md
+site-ranker report ./website-x --output seo-report.md
 ```
 
 ### Docker Usage
@@ -93,19 +93,19 @@ site-ranker report ./my-site --output seo-report.md
 docker build -t site-ranker .
 
 # Run analysis
-docker run -v $(pwd)/my-site:/workspace site-ranker analyze /workspace
+docker run -v $(pwd)/website-x:/workspace site-ranker analyze /workspace
 
 # Run optimization
-docker run -v $(pwd)/my-site:/workspace -v $(pwd)/output:/output \
+docker run -v $(pwd)/website-x:/workspace -v $(pwd)/output:/output \
   site-ranker run /workspace --output /output \
-  --site-name "My Site" --site-url "https://mysite.com"
+  --site-name "Website-X" --site-url "https://website-x.com"
 ```
 
 ## What Gets Injected?
 
 ### Meta Tags
 ```html
-<title>Your Optimized Title | Site Name</title>
+<title>Optimized Title | Site Name</title>
 <meta name="description" content="AI-generated compelling description...">
 <meta name="keywords" content="keyword1, keyword2, keyword3">
 <meta name="robots" content="index, follow">
