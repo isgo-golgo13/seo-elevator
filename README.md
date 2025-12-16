@@ -106,23 +106,23 @@ docker run -v $(pwd)/mysite:/home/siteranker/workspace site-ranker analyze /home
 
 ## Quick Start
 
-### 1. Analyze Your Website
+### 1. Analyze Website
 
 ```bash
-site-ranker analyze ./my-website
+site-ranker analyze ./website-x
 ```
 
 Output:
 ```
-🔍 Analyzing website...
+Analyzing website...
 ──────────────────────────────────────────────────
 
-📊 ANALYSIS RESULTS
+ANALYSIS RESULTS
 ══════════════════════════════════════════════════
 
-🔧 Framework: React
-📄 Main file: ./my-website/public/index.html
-🏢 Business Type: SaaS
+Framework: React
+Main file: ./my-website/public/index.html
+Business Type: SaaS
 
 SEO Audit:
    [+] Title tag
