@@ -1,0 +1,21 @@
+[package]
+name = "site-ranker-injector"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "SEO metadata injection engine for site-ranker-rs - Meta tags, Open Graph, Twitter Cards, Schema.org"
+
+[dependencies]
+site-ranker-analyzer = { workspace = true }
+scraper.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+chrono.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

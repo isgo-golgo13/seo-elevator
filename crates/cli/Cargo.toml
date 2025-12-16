@@ -1,0 +1,41 @@
+[package]
+name = "site-ranker-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "CLI for site-ranker-rs - AI-powered SEO rank accelerator"
+
+[[bin]]
+name = "site-ranker"
+path = "src/main.rs"
+
+[dependencies]
+# Internal crates
+site-ranker-analyzer = { workspace = true }
+site-ranker-injector = { workspace = true }
+site-ranker-ml-engine = { workspace = true }
+
+# CLI
+clap.workspace = true
+
+# Async
+tokio.workspace = true
+
+# Serialization
+serde.workspace = true
+serde_json.workspace = true
+
+# Error handling
+anyhow.workspace = true
+
+# Logging
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+# Output
+colored.workspace = true
+
+[dev-dependencies]
+tempfile = "3.10"

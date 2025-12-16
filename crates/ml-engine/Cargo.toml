@@ -1,0 +1,27 @@
+[package]
+name = "site-ranker-ml-engine"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "ML-powered SEO optimization engine - sentiment analysis, content optimization, trend prediction"
+
+[features]
+default = []
+# Enable PyTorch integration (requires libtorch)
+torch = ["tch"]
+
+[dependencies]
+site-ranker-analyzer = { workspace = true }
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+tokio.workspace = true
+
+# PyTorch (optional, feature-gated)
+tch = { version = "0.14", optional = true }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

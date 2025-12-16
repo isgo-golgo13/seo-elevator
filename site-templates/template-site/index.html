@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        nav {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #495057;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #667eea;
+        }
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .service-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: box-shadow 0.3s;
+        }
+        .service-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .service-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        .features {
+            background: #f8f9fa;
+            padding: 3rem 2rem;
+            margin: 3rem 0;
+            border-radius: 8px;
+        }
+        .features h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .feature-icon {
+            font-size: 1.5rem;
+        }
+        .cta {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+        .cta h2 {
+            margin-bottom: 1rem;
+        }
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        .cta-button:hover {
+            background: #f8f9fa;
+        }
+        footer {
+            background: #212529;
+            color: #adb5bd;
+            padding: 2rem;
+            text-align: center;
+        }
+        footer a {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Professional Software Solutions</h1>
+        <p>We build amazing software that transforms businesses</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="services">
+            <h2>Our Services</h2>
+            <div class="services">
+                <div class="service-card">
+                    <h3>Cloud Migration</h3>
+                    <p>Seamlessly migrate your infrastructure to AWS or GCP with zero downtime. Our expert team handles everything from assessment to execution.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Security Consulting</h3>
+                    <p>Comprehensive security assessments and compliance audits. We identify vulnerabilities and implement enterprise-grade protection.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Custom Development</h3>
+                    <p>High-performance software solutions built with modern technologies. From APIs to full-stack applications, we deliver quality.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Why Choose Us</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🚀</span>
+                    <div>
+                        <strong>Fast Delivery</strong>
+                        <p>Agile methodology ensures quick turnaround</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <div>
+                        <strong>Security First</strong>
+                        <p>Enterprise-grade security in every solution</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💎</span>
+                    <div>
+                        <strong>Quality Code</strong>
+                        <p>Clean, maintainable, well-documented code</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🤝</span>
+                    <div>
+                        <strong>Dedicated Support</strong>
+                        <p>24/7 support and ongoing maintenance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2>Ready to Transform Your Business?</h2>
+            <p>Let's discuss how we can help you achieve your goals.</p>
+            <a href="#contact" class="cta-button">Get Started Today</a>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>With over 20 years of experience in software architecture and development, we've helped hundreds of companies modernize their technology stack. Our team specializes in high-performance systems, cloud infrastructure, and security solutions.</p>
+            <p>We believe in delivering "Rolex quality" solutions - precision-engineered software that stands the test of time.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Professional Software Solutions. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:hello@example.com">hello@example.com</a></p>
+    </footer>
+</body>
+</html>
