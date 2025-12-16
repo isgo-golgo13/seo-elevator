@@ -274,7 +274,11 @@ Based on ROI analysis:
 | 🥉 | Meta Tags | Foundation for all SEO |
 | 4 | Canonical URLs | Prevents duplicate content |
 
-## Roadmap
+
+---
+
+
+## Future Extemsions
 
 - [x] Core analyzer engine
 - [x] SEO injector pipeline  
