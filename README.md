@@ -99,6 +99,28 @@ docker run -v $(pwd)/mysite:/home/siteranker/workspace site-ranker analyze /home
 ### Using the Makefile
 
 ```shell
+make build              # Build release binary
+make test               # Run all tests
+make lint               # fmt-check + clippy
+make run ARGS='analyze ./site'
+make install-local      # Install to ~/.local/bin
+make dist               # Create distribution tarball
+
+# Docker commands 
+make docker-build       # Build via Docker
+make docker-test        # Run tests via Docker
+make docker-lint        # Lint Docker
+make docker-run ARGS='analyze /workspace/site'
+make docker-shell       # Open dev shell
+make docker-image       # Build production image
+
+# Docker Compose 
+docker-compose up dev           # Development environment
+docker-compose run build        # Build binary
+docker-compose run test         # Run tests
+docker-compose run analyze      # Analyze template
+docker-compose run optimize     # Full optimization pipeline
+docker-compose run watch        # Watch mode (cargo-watch)
 ```
 
 

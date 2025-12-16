@@ -1,0 +1,174 @@
+# ============================================================================
+# site-ranker-rs Docker Compose
+# ============================================================================
+# 
+# Usage:
+#   docker-compose up dev          # Start development environment
+#   docker-compose run build       # Build release binary
+#   docker-compose run test        # Run tests
+#   docker-compose run analyze     # Analyze sample site
+#   docker-compose run --rm cli analyze /workspace/site-templates/template-site
+#
+# ============================================================================
+
+version: "3.9"
+
+services:
+  # ==========================================================================
+  # Development Environment
+  # ==========================================================================
+  dev:
+    build:
+      context: .
+      target: dev
+    image: site-ranker-rs:dev
+    container_name: site-ranker-dev
+    volumes:
+      - .:/workspace
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/workspace/target
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    command: bash
+    environment:
+      - RUST_BACKTRACE=1
+      - CARGO_HOME=/usr/local/cargo
+
+  # ==========================================================================
+  # Build Service
+  # ==========================================================================
+  build:
+    image: rust:1.75-bookworm
+    volumes:
+      - .:/workspace
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/workspace/target
+    working_dir: /workspace
+    command: cargo build --release --package site-ranker-cli
+    environment:
+      - CARGO_HOME=/usr/local/cargo
+
+  # ==========================================================================
+  # Test Service
+  # ==========================================================================
+  test:
+    image: rust:1.75-bookworm
+    volumes:
+      - .:/workspace
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/workspace/target
+    working_dir: /workspace
+    command: cargo test --workspace
+    environment:
+      - RUST_BACKTRACE=1
+      - CARGO_HOME=/usr/local/cargo
+
+  # ==========================================================================
+  # Lint Service
+  # ==========================================================================
+  lint:
+    image: rust:1.75-bookworm
+    volumes:
+      - .:/workspace
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/workspace/target
+    working_dir: /workspace
+    command: >
+      sh -c "rustup component add clippy rustfmt &&
+             cargo fmt --all -- --check &&
+             cargo clippy --workspace --all-targets -- -D warnings"
+    environment:
+      - CARGO_HOME=/usr/local/cargo
+
+  # ==========================================================================
+  # CLI Service (Production Image)
+  # ==========================================================================
+  cli:
+    build:
+      context: .
+      target: runtime
+    image: site-ranker-rs:latest
+    volumes:
+      - .:/workspace:ro
+      - ./dist:/output
+    working_dir: /workspace
+    # Override entrypoint to allow flexible commands
+    entrypoint: ["/usr/bin/tini", "--", "site-ranker"]
+
+  # ==========================================================================
+  # Analyze Template Site
+  # ==========================================================================
+  analyze:
+    build:
+      context: .
+      target: runtime
+    image: site-ranker-rs:latest
+    volumes:
+      - .:/workspace:ro
+    command: analyze /workspace/site-templates/template-site
+
+  # ==========================================================================
+  # Full Optimization Pipeline
+  # ==========================================================================
+  optimize:
+    build:
+      context: .
+      target: runtime
+    image: site-ranker-rs:latest
+    volumes:
+      - .:/workspace:ro
+      - ./dist:/output
+    command: >
+      run /workspace/site-templates/template-site
+      --site-name "Demo Site"
+      --site-url "https://demo.enginevector.io"
+      --output /output/optimized-site
+
+  # ==========================================================================
+  # Documentation Generator
+  # ==========================================================================
+  docs:
+    image: rust:1.75-bookworm
+    volumes:
+      - .:/workspace
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/workspace/target
+    working_dir: /workspace
+    command: cargo doc --workspace --no-deps
+    environment:
+      - CARGO_HOME=/usr/local/cargo
+
+  # ==========================================================================
+  # Watch Mode (Development)
+  # ==========================================================================
+  watch:
+    image: rust:1.75-bookworm
+    volumes:
+      - .:/workspace
+      - cargo-cache:/usr/local/cargo/registry
+      - target-cache:/workspace/target
+    working_dir: /workspace
+    command: >
+      sh -c "cargo install cargo-watch &&
+             cargo watch -x 'check --workspace' -x 'test --workspace'"
+    environment:
+      - CARGO_HOME=/usr/local/cargo
+    stdin_open: true
+    tty: true
+
+# ============================================================================
+# Volumes for caching
+# ============================================================================
+volumes:
+  cargo-cache:
+    name: site-ranker-cargo-cache
+  target-cache:
+    name: site-ranker-target-cache
+
+# ============================================================================
+# Networks
+# ============================================================================
+networks:
+  default:
+    name: site-ranker-network
