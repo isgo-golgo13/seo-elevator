@@ -288,6 +288,7 @@ Based on ROI analysis:
 - [ ] Web UI dashboard
 - [ ] API server mode
 - [ ] Chrome extension
+- [ ] SaaS Adapter version
 
 ## License
 
