@@ -8,7 +8,7 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
-## Why site-ranker-rs?
+## Intention of site-ranker-rs?
 
 | Traditional SEO Tools | site-ranker-rs |
 |-----------------------|----------------|
@@ -142,6 +142,10 @@ Recommendations:
 ### 2. Inject SEO Metadata
 
 ```bash
+# Test it (Safe dry-run analysis ONLY)
+.site-ranker analyze ./site-templates/template-site
+
+
 site-ranker inject ./website-x \
   --site-name "Website-X" \
   --site-url "https://website-x.com" \
