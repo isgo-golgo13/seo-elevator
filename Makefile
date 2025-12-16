@@ -26,6 +26,7 @@ RELEASE_DIR     := $(BUILD_DIR)/release
 DEBUG_DIR       := $(BUILD_DIR)/debug
 DIST_DIR        := dist
 INSTALL_DIR     := /usr/local/bin
+TEST_SITE_DIR   := .test-site
 
 # Docker run options for cargo wrapper
 DOCKER_RUN_OPTS := --rm -v $(PWD):/workspace -w /workspace
@@ -59,10 +60,10 @@ help: ## Show this help message
 	@grep -E '^docker-[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  $(CYAN)%-20s$(RESET) %s\n", $$1, $$2}'
 	@echo ""
 	@echo "$(BOLD)Examples:$(RESET)"
-	@echo "  make build                    # Build release binary"
-	@echo "  make docker-build             # Build via Docker (no Rust needed)"
-	@echo "  make run ARGS='analyze ./site-templates/template-site'"
-	@echo "  make docker-run ARGS='analyze /workspace/site-templates/template-site'"
+	@echo "  make build                              # Build release binary"
+	@echo "  make analyze-url URL=https://example.com  # Analyze any URL"
+	@echo "  make analyze-enginevector               # Analyze enginevector.io"
+	@echo "  make optimize-url URL=https://example.com NAME='My Site'"
 	@echo ""
 
 # ============================================================================
@@ -72,6 +73,11 @@ help: ## Show this help message
 build: ## Build release binary
 	@echo "$(CYAN)Building release binary...$(RESET)"
 	cargo build --release --package $(PACKAGE_NAME)
+	@echo "$(GREEN)✓ Binary built: $(RELEASE_DIR)/$(BINARY_NAME)$(RESET)"
+
+.PHONY: build-quiet
+build-quiet: ## Build release binary (suppress warnings)
+	@cargo build --release --package $(PACKAGE_NAME) 2>&1 | grep -v "^warning:" || true
 	@echo "$(GREEN)✓ Binary built: $(RELEASE_DIR)/$(BINARY_NAME)$(RESET)"
 
 .PHONY: build-debug
@@ -161,18 +167,93 @@ run: build ## Run the CLI (use ARGS='...' for arguments)
 run-debug: build-debug ## Run debug build
 	$(DEBUG_DIR)/$(BINARY_NAME) $(ARGS)
 
+# ============================================================================
+# Analyze Targets
+# ============================================================================
 .PHONY: analyze-template
 analyze-template: build ## Analyze the template site
 	$(RELEASE_DIR)/$(BINARY_NAME) analyze ./site-templates/template-site
 
+.PHONY: analyze-url
+analyze-url: build ## Analyze any URL (use URL=https://...)
+ifndef URL
+	$(error URL is required. Usage: make analyze-url URL=https://example.com)
+endif
+	@echo "$(CYAN)Fetching $(URL)...$(RESET)"
+	@mkdir -p $(TEST_SITE_DIR)
+	@curl -sL -o $(TEST_SITE_DIR)/index.html "$(URL)"
+	@echo "$(GREEN)✓ Fetched to $(TEST_SITE_DIR)/index.html$(RESET)"
+	@echo ""
+	$(RELEASE_DIR)/$(BINARY_NAME) analyze $(TEST_SITE_DIR)
+
+.PHONY: analyze-enginevector
+analyze-enginevector: ## Analyze enginevector.io
+	@$(MAKE) analyze-url URL=https://www.enginevector.io
+
+.PHONY: analyze-dir
+analyze-dir: build ## Analyze a local directory (use DIR=./path)
+ifndef DIR
+	$(error DIR is required. Usage: make analyze-dir DIR=./my-site)
+endif
+	$(RELEASE_DIR)/$(BINARY_NAME) analyze $(DIR)
+
+# ============================================================================
+# Optimize Targets
+# ============================================================================
 .PHONY: optimize-template
 optimize-template: build ## Run full optimization on template site
-	@mkdir -p ./dist/optimized-site
+	@mkdir -p $(DIST_DIR)/optimized-site
 	$(RELEASE_DIR)/$(BINARY_NAME) run ./site-templates/template-site \
 		--site-name "Demo Site" \
 		--site-url "https://demo.enginevector.io" \
-		--output ./dist/optimized-site
-	@echo "$(GREEN)✓ Optimized site in ./dist/optimized-site$(RESET)"
+		--output $(DIST_DIR)/optimized-site
+	@echo "$(GREEN)✓ Optimized site in $(DIST_DIR)/optimized-site$(RESET)"
+
+.PHONY: optimize-url
+optimize-url: build ## Optimize any URL (URL=, NAME=, SITE_URL=, TWITTER=)
+ifndef URL
+	$(error URL is required. Usage: make optimize-url URL=https://example.com NAME='My Site')
+endif
+	@echo "$(CYAN)Fetching $(URL)...$(RESET)"
+	@mkdir -p $(TEST_SITE_DIR)
+	@curl -sL -o $(TEST_SITE_DIR)/index.html "$(URL)"
+	@mkdir -p $(DIST_DIR)/optimized
+	$(RELEASE_DIR)/$(BINARY_NAME) run $(TEST_SITE_DIR) \
+		--site-name "$(or $(NAME),My Site)" \
+		--site-url "$(or $(SITE_URL),$(URL))" \
+		$(if $(TWITTER),--twitter $(TWITTER)) \
+		$(if $(EMAIL),--email $(EMAIL)) \
+		$(if $(IMAGE),--image $(IMAGE)) \
+		--output $(DIST_DIR)/optimized
+	@echo "$(GREEN)✓ Optimized site in $(DIST_DIR)/optimized$(RESET)"
+
+.PHONY: optimize-enginevector
+optimize-enginevector: ## Optimize enginevector.io with full config
+	@$(MAKE) optimize-url \
+		URL=https://www.enginevector.io \
+		NAME="EngineVector" \
+		SITE_URL="https://enginevector.io" \
+		TWITTER="enginevector" \
+		EMAIL="info@enginevector.io"
+
+# ============================================================================
+# Report Targets
+# ============================================================================
+.PHONY: report-url
+report-url: build ## Generate SEO report for URL (use URL=https://...)
+ifndef URL
+	$(error URL is required. Usage: make report-url URL=https://example.com)
+endif
+	@echo "$(CYAN)Fetching $(URL)...$(RESET)"
+	@mkdir -p $(TEST_SITE_DIR)
+	@curl -sL -o $(TEST_SITE_DIR)/index.html "$(URL)"
+	@mkdir -p $(DIST_DIR)
+	$(RELEASE_DIR)/$(BINARY_NAME) report $(TEST_SITE_DIR) --output $(DIST_DIR)/seo-report.md
+	@echo "$(GREEN)✓ Report saved to $(DIST_DIR)/seo-report.md$(RESET)"
+
+.PHONY: report-enginevector
+report-enginevector: ## Generate SEO report for enginevector.io
+	@$(MAKE) report-url URL=https://www.enginevector.io
 
 # ============================================================================
 # Native Install Targets
@@ -347,7 +428,7 @@ docker-bench: ## Run benchmarks via Docker
 clean: ## Clean build artifacts
 	@echo "$(CYAN)Cleaning build artifacts...$(RESET)"
 	cargo clean
-	rm -rf $(DIST_DIR)
+	rm -rf $(DIST_DIR) $(TEST_SITE_DIR)
 	@echo "$(GREEN)✓ Clean complete$(RESET)"
 
 .PHONY: clean-docker

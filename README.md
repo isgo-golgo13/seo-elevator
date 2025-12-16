@@ -123,6 +123,31 @@ docker-compose run optimize     # Full optimization pipeline
 docker-compose run watch        # Watch mode (cargo-watch)
 ```
 
+#### Makefile w/ `analyzer` Sub-Commands
+
+```shell
+# Analyze enginevector.io (one command!)
+make analyze-enginevector
+
+# Analyze any URL
+make analyze-url URL=https://www.website-x.com
+
+# Full optimization with all your settings
+make optimize-enginevector
+
+# Optimize any URL with custom settings
+make optimize-url URL=https://website-x.com NAME="Website-X" TWITTER="website-x-handle"
+
+# Generate SEO report
+make report-enginevector
+
+# Analyze local directory
+make analyze-dir DIR=./website-x
+```
+
+
+
+
 
 ## Quick Start
 
