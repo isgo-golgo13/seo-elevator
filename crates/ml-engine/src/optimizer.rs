@@ -4,10 +4,11 @@
 //! Provides keyword density analysis and suggestions.
 
 use crate::{
-    DescriptionSuggestion, KeywordOptimization, MlEngineError, MlResult, MlStrategy,
+    DescriptionSuggestion, MlEngineError, MlResult, MlStrategy,
     TitleSuggestion,
 };
 use site_ranker_analyzer::AnalysisResult;
+use chrono::Utc;
 
 /// Keyword optimization analysis
 #[derive(Debug, Clone)]
@@ -155,7 +156,7 @@ impl ContentOptimizer {
         }
 
         // Pattern 4: Year freshness
-        let year = chrono::Utc::now().format("%Y");
+        let year = Utc::now().format("%Y");
         if !site_topic.is_empty() {
             let title = format!("{} Guide {} - Expert Resources", site_topic, year);
             if title.len() <= 60 {
@@ -177,18 +178,20 @@ impl ContentOptimizer {
     ) -> Vec<DescriptionSuggestion> {
         let mut suggestions = Vec::new();
 
-        let keywords: Vec<_> = analysis.top_keywords(5).iter().map(|k| &k.word).collect();
+        let keywords: Vec<String> = analysis.top_keywords(5).iter().map(|k| k.word.clone()).collect();
 
         if keywords.is_empty() {
             return suggestions;
         }
 
+        let default_proven = "proven".to_string();
+        
         // Pattern 1: Problem-Solution with CTA
         let desc = format!(
             "Looking for {}? Our {} experts deliver {} results. Get started today with a free consultation.",
             keywords[0],
             keywords.get(1).unwrap_or(&keywords[0]),
-            keywords.get(2).unwrap_or(&"proven")
+            keywords.get(2).unwrap_or(&default_proven)
         );
 
         if desc.len() <= 160 {
@@ -270,9 +273,6 @@ fn capitalize(s: &str) -> String {
         Some(first) => first.to_uppercase().chain(chars).collect(),
     }
 }
-
-// Add chrono for year in suggestions
-use chrono;
 
 #[cfg(test)]
 mod tests {

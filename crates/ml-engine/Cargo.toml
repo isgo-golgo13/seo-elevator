@@ -19,6 +19,7 @@ serde_json.workspace = true
 thiserror.workspace = true
 tracing.workspace = true
 tokio.workspace = true
+chrono.workspace = true
 
 # PyTorch (optional, feature-gated)
 tch = { version = "0.14", optional = true }

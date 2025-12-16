@@ -77,7 +77,7 @@ pub struct Keyword {
 }
 
 /// Detected business/service type
-#[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum BusinessType {
     #[default]
     Unknown,

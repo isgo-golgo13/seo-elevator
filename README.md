@@ -1,8 +1,8 @@
 # Site Ranker (Rust)
-Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-rank spiking for site developers in Rust. 
+Site SEO Rank Spiking (AI-Driven) Engine providing Rolex-grade at-scale site-rank spiking for site developers in Rust. 
 
 
-**AI-powered SEO rank accelerator** - Analyze, optimize, and inject enterprise-grade SEO metadata into any website.
+**AI-Driven SEO rank accelerator** - Analyze, optimize, and inject enterprise-grade SEO metadata into any website.
 
 [![Rust](https://img.shields.io/badge/rust-1.75+-blue.svg)](https://www.rust-lang.org)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)

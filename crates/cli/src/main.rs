@@ -10,9 +10,10 @@
 //! - `report` - Generate detailed SEO report
 
 use anyhow::{Context, Result};
+use chrono::Utc;
 use clap::{Parser, Subcommand};
 use colored::*;
-use site_ranker_analyzer::{AnalyzerPipeline, DirectoryAnalysis, Framework};
+use site_ranker_analyzer::{AnalyzerPipeline, DirectoryAnalysis};
 use site_ranker_injector::{InjectorPipeline, SeoConfig};
 use site_ranker_ml_engine::{MlEngine, MlResult, Priority};
 use std::path::PathBuf;
@@ -567,7 +568,7 @@ fn generate_report(analysis: &DirectoryAnalysis, ml_result: &MlResult) -> String
     let mut report = String::new();
 
     report.push_str("# SEO Analysis Report\n\n");
-    report.push_str(&format!("Generated: {}\n\n", chrono::Utc::now().format("%Y-%m-%d %H:%M:%S UTC")));
+    report.push_str(&format!("Generated: {}\n\n", Utc::now().format("%Y-%m-%d %H:%M:%S UTC")));
 
     report.push_str("## Overview\n\n");
     report.push_str(&format!("- **Framework**: {:?}\n", analysis.framework));
@@ -604,6 +605,3 @@ fn generate_report(analysis: &DirectoryAnalysis, ml_result: &MlResult) -> String
 
     report
 }
-
-// Add chrono for report timestamp
-use chrono;
