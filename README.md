@@ -81,3 +81,115 @@ site-ranker-rs/
 | `cli`              | clap, tokio, colored, all internal crates | 
 
 
+## Installation
+
+### From Source
+
+```bash
+git clone https://github.com/enginevector/site-ranker-rs.git
+cd site-ranker-rs
+cargo build --release
+```
+
+### Docker
+
+```bash
+docker build -t site-ranker .
+docker run -v $(pwd)/mysite:/home/siteranker/workspace site-ranker analyze /home/siteranker/workspace
+```
+
+### Using the Makefile
+
+```shell
+```
+
+
+## Quick Start
+
+### 1. Analyze Your Website
+
+```bash
+site-ranker analyze ./my-website
+```
+
+Output:
+```
+🔍 Analyzing website...
+──────────────────────────────────────────────────
+
+📊 ANALYSIS RESULTS
+══════════════════════════════════════════════════
+
+🔧 Framework: React
+📄 Main file: ./my-website/public/index.html
+🏢 Business Type: SaaS
+
+SEO Audit:
+   [+] Title tag
+   [x] Meta description
+   [x] Open Graph tags
+   [x] Twitter Cards
+   [x] Schema.org markup
+
+SEO Score: 15/100
+  Optimization Score: 42/100
+
+Recommendations:
+   🔴 Missing meta description
+      → Add a compelling meta description (150-160 characters)
+   🟠 Missing Schema.org structured data
+      → Add JSON-LD schema for rich snippets in search results
+```
+
+### 2. Inject SEO Metadata
+
+```bash
+site-ranker inject ./website-x \
+  --site-name "Website-X" \
+  --site-url "https://website-x.com" \
+  --twitter "webite-x" \
+  --output ./optimized
+```
+
+### 3. Full Pipeline (Recommended)
+
+```bash
+site-ranker run ./website-x \
+  --site-name "Website-X" \
+  --site-url "https://website-x.com" \
+  --twitter "website-x" \
+  --email "info@website-x.com" \
+  --output ./optimized
+```
+
+### 4. Generate Report
+
+```bash
+site-ranker report ./website-x --output seo-report.md
+```
+
+
+### Strategy Pattern
+
+All major components use the Strategy pattern for extensibility:
+
+```rust
+// Add custom analyzer
+pub trait AnalyzerStrategy: Send + Sync {
+    fn name(&self) -> &'static str;
+    fn analyze(&self, content: &str) -> Result<AnalysisResult, AnalyzerError>;
+}
+
+// Add custom injector
+pub trait InjectorStrategy: Send + Sync {
+    fn name(&self) -> &'static str;
+    fn generate(&self, analysis: &AnalysisResult, config: &SeoConfig) -> Result<String, InjectorError>;
+    fn inject_content(&self, html: &str, content: &str) -> Result<String, InjectorError>;
+}
+
+// Add custom ML strategy
+pub trait MlStrategy: Send + Sync {
+    fn name(&self) -> &'static str;
+    fn process(&self, analysis: &AnalysisResult) -> Result<MlResult, MlEngineError>;
+}
+```
