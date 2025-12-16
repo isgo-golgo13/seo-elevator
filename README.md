@@ -1,5 +1,5 @@
 # Site Ranker (Rust)
-Site SEO Rank Spiking Engine in Rust
+Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-rank spiking for site developers in Rust. 
 
 # Project Structure
 ```shell
