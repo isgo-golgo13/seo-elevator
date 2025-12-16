@@ -45,6 +45,7 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 - **Twitter (X) Cards** - Summary and large image cards
 - **JSON-LD Schema** - Full structured data graph
 
+---
 
 
 # Project Structure
