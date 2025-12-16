@@ -1,4 +1,4 @@
-# Site Ranker (Rust)
+# AI Site Ranker (Rust)
 Site SEO Rank Spiking (AI-Driven) Engine providing Rolex-grade at-scale site analysis for SEO tags, site SEO meta-data tag injection and site-rank spiking for site developers in Rust. 
 
 
