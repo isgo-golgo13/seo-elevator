@@ -51,23 +51,21 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 # Project Structure
 ```shell
 site-ranker-rs/
-├── Cargo.toml              # Workspace configuration
-├── Dockerfile              # Rootless multi-stage container
-├── README.md               # Main documentation
-├── QUICKSTART.md           # Quick start and deploy documentation
-├── compiling.md            # Compile and execution guide
-├── LICENSE                 # MIT License
-├── .dockerignore           # Docker build exclusions
-│
-├── crates/                 # Modular crate architecture
-│   ├── analyzer/           # Website analysis
-│   ├── injector/           # SEO injection
-│   ├── ml-engine/          # ML optimization
-│   └── cli/                # Command-line interface
-│
-└── test-site/               # Test websites
-    └── test-site/
-        └── index.html
+├── Cargo.toml                          # Workspace config
+├── Dockerfile                          # Rootless multi-stage
+├── README.md                           # Full documentation
+├── QUICKSTART.md                       # 2-minute guide
+├── crates/
+│   ├── analyzer/                       # 5 files - HTML parsing, keyword extraction
+│   │   └── src/{lib,error,types,strategies/*}.rs
+│   ├── injector/                       # 7 files - Meta, OG, Twitter, Schema.org
+│   │   └── src/{lib,error,types,strategies/*}.rs
+│   ├── ml-engine/                      # 5 files - Sentiment, optimizer, trends
+│   │   └── src/{lib,error,sentiment,optimizer,trend}.rs
+│   └── cli/                            # Full CLI with analyze/inject/run/report
+│       └── src/main.rs
+└── site-templates/template-site/       # Test HTML site
+    └── index.html
 ```
 
 ## Key Dependencies Per-Crate
