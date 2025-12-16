@@ -1,4 +1,4 @@
-## QUICK TEST PLAN
+## QUICK DRY RUN PLAN
 
 ```shell
 # 1. Extract and build
