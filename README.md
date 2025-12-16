@@ -7,7 +7,8 @@ site-ranker-rs/
 ├── Cargo.toml              # Workspace configuration
 ├── Dockerfile              # Rootless multi-stage container
 ├── README.md               # Main documentation
-├── compiling.md             # Compile and execution guide
+├── QUICKSTART.md           # Quick start and deploy documentation
+├── compiling.md            # Compile and execution guide
 ├── LICENSE                 # MIT License
 ├── .dockerignore           # Docker build exclusions
 │
