@@ -4,7 +4,7 @@ Site SEO Rank Spiking (ML-Driven) Engine providing Rolex-grade at-scale site-ran
 
 **AI-powered SEO rank accelerator** - Analyze, optimize, and inject enterprise-grade SEO metadata into any website.
 
-[![Rust](https://img.shields.io/badge/rust-1.75+-red.svg)](https://www.rust-lang.org)
+[![Rust](https://img.shields.io/badge/rust-1.75+-blue.svg)](https://www.rust-lang.org)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 
