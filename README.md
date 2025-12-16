@@ -193,3 +193,79 @@ pub trait MlStrategy: Send + Sync {
     fn process(&self, analysis: &AnalysisResult) -> Result<MlResult, MlEngineError>;
 }
 ```
+
+
+
+## Configuration
+
+### SeoConfig Builder
+
+```rust
+use site_ranker_injector::{SeoConfig, Address};
+
+let config = SeoConfig::builder()
+    .site_name("My Company")
+    .site_url("https://mycompany.com")
+    .twitter_handle("mycompany")
+    .default_image("https://mycompany.com/og-image.png")
+    .contact_email("hello@mycompany.com")
+    .phone("+1-555-123-4567")
+    .address(Address {
+        street: "123 Main St",
+        city: "San Francisco",
+        state: "CA",
+        postal_code: "94102",
+        country: "US",
+    })
+    .build();
+```
+
+### CLI Options
+
+```
+USAGE:
+    site-ranker [OPTIONS] <COMMAND>
+
+COMMANDS:
+    analyze  Analyze website for SEO opportunities
+    inject   Inject optimized SEO metadata
+    run      Full pipeline (analyze + optimize + inject)
+    report   Generate detailed SEO report
+
+OPTIONS:
+    -v, --verbose        Enable verbose logging
+    -f, --format <FMT>   Output format: text, json [default: text]
+    -h, --help           Print help
+    -V, --version        Print version
+```
+
+## SEO Injection Priority
+
+Based on ROI analysis:
+
+| Priority | Feature | Impact |
+|----------|---------|--------|
+| 🥇 | Schema.org JSON-LD | 30%+ CTR with rich snippets |
+| 🥈 | Open Graph + Twitter | 2-3x social engagement |
+| 🥉 | Meta Tags | Foundation for all SEO |
+| 4 | Canonical URLs | Prevents duplicate content |
+
+## Roadmap
+
+- [x] Core analyzer engine
+- [x] SEO injector pipeline  
+- [x] Rule-based ML engine
+- [x] CLI interface
+- [ ] PyTorch deep learning models (`--features torch`)
+- [ ] Web UI dashboard
+- [ ] API server mode
+- [ ] WordPress plugin
+- [ ] Chrome extension
+
+## License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## Author
+
+**EngineVector** - [enginevector.io](https://enginevector.io)
