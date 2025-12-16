@@ -261,7 +261,6 @@ Based on ROI analysis:
 - [ ] PyTorch deep learning models (`--features torch`)
 - [ ] Web UI dashboard
 - [ ] API server mode
-- [ ] WordPress plugin
 - [ ] Chrome extension
 
 ## License
