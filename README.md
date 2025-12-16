@@ -206,17 +206,17 @@ pub trait MlStrategy: Send + Sync {
 use site_ranker_injector::{SeoConfig, Address};
 
 let config = SeoConfig::builder()
-    .site_name("My Company")
-    .site_url("https://mycompany.com")
-    .twitter_handle("mycompany")
-    .default_image("https://mycompany.com/og-image.png")
-    .contact_email("hello@mycompany.com")
-    .phone("+1-555-123-4567")
+    .site_name("EngineVector")
+    .site_url("https://enginevector.io")
+    .twitter_handle("enginevector")
+    .default_image("https://enginevector.io/og-image.png")
+    .contact_email("info@menginevector.io")
+    .phone("+XX-XXXXXXXXX")
     .address(Address {
-        street: "123 Main St",
-        city: "San Francisco",
+        street: "XXXXXXXXXX St.",
+        city: "Los Angeles",
         state: "CA",
-        postal_code: "94102",
+        postal_code: "90048",
         country: "US",
     })
     .build();
